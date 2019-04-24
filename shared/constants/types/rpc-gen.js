@@ -529,6 +529,7 @@ export const kbfsCommonFSNotificationType = {
   fileDeleted: 9,
   fileRenamed: 10,
   initialized: 11,
+  syncConfigChanged: 12,
 }
 
 export const kbfsCommonFSStatusCode = {
