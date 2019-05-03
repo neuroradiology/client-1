@@ -24,3 +24,7 @@ func (c *CachedContactsProvider) LookupEmails(mctx libkb.MetaContext, emails []k
 func (c *CachedContactsProvider) FillUsernames(mctx libkb.MetaContext, res []keybase1.ProcessedContact) {
 	c.Provider.FillUsernames(mctx, res)
 }
+
+func (c *CachedContactsProvider) FillFollowing(mctx libkb.MetaContext, res []keybase1.ProcessedContact) {
+	c.Provider.FillFollowing(mctx, res)
+}

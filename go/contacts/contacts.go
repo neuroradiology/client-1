@@ -19,6 +19,7 @@ type ContactsProvider interface {
 	LookupPhoneNumbers(libkb.MetaContext, []keybase1.RawPhoneNumber, keybase1.RegionCode) ([]ContactLookupResult, error)
 	LookupEmails(libkb.MetaContext, []keybase1.EmailAddress) ([]ContactLookupResult, error)
 	FillUsernames(libkb.MetaContext, []keybase1.ProcessedContact)
+	FillFollowing(libkb.MetaContext, []keybase1.ProcessedContact)
 }
 
 // ResolveContacts resolves contacts with cache for UI. See API documentation
@@ -93,11 +94,8 @@ func ResolveContacts(mctx libkb.MetaContext, provider ContactsProvider, contacts
 			Component:    component,
 			Resolved:     true,
 			Uid:          lookupRes.UID,
-			Following:    true, // assume following=true for now because this creates better display label.
 
-			// following, username (TODO???), and full name are filled later.
-			// unless endpoints start providing this data through
-			// ContactLookupResult
+			// Following, Username, Fullname are filled afterwards using provider.
 		})
 	}
 
@@ -129,12 +127,9 @@ func ResolveContacts(mctx libkb.MetaContext, provider ContactsProvider, contacts
 
 	if len(res) > 0 {
 		// Uidmap everything to get Keybase usernames and full names.
-
-		// TODO: The uidmapper part might not be needed if we change the lookup
-		// endpoints to return usernames and full names. This is fine since
-		// phone/email is server trust, and also UIDMapper trusts sever for
-		// full names anyway. Also might need to return follow information.
 		provider.FillUsernames(mctx, res)
+		// Get tracking info and set "Following" field for contacts.
+		provider.FillFollowing(mctx, res)
 
 		// And now that we have Keybase names and following information, make a
 		// decision about displayName and displayLabel.
