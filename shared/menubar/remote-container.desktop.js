@@ -16,9 +16,13 @@ import {isWindows, isDarwin, isLinux} from '../constants/platform'
 import * as RPCTypes from '../constants/types/rpc-gen'
 import * as SettingsGen from '../actions/settings-gen'
 import flags from '../util/feature-flags'
+import * as Types from '../constants/types/fs'
 
 // Props are handled by remote-proxy.desktop.js
 const mapDispatchToProps = dispatch => ({
+  _onRetrySync: name => () =>
+    // This LoadPathMetadata triggers a sync retry.
+    dispatch(FsGen.createLoadPathMetadata({path: Types.stringToPath('/keybase/private' + name)})),
   _showUser: (username: string) => {
     const link = urlHelper('user', {username})
     link && openUrl(link)
@@ -75,9 +79,8 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   return {
     ...stateProps,
     ...dispatchProps,
-    refreshUserFileEdits: dispatchProps.refreshUserFileEdits,
+    onRetrySync: dispatchProps._onRetrySync(stateProps.username),
     showUser: () => dispatchProps._showUser(stateProps.username),
-    waitForKbfsDaemon: dispatchProps.waitForKbfsDaemon,
     ...ownProps,
   }
 }
