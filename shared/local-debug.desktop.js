@@ -29,6 +29,7 @@ let config = {
   skipSecondaryDevtools: true, // Don't show devtools for menubar/trackers etc
   userTimings: false, // Add user timings api to timeline in chrome
   virtualListMarks: false, // If true add constraints to items in virtual lists so we can tell when measuring is incorrect
+  useNativeFrame: true, // TODO no on windows
 }
 
 // Developer settings
@@ -75,6 +76,21 @@ if (!__STORYBOOK__) {
       }
     } catch (e) {
       console.warn('Invalid local debug file')
+    }
+  }
+
+  // Load overrides from the config json file. Used during app startup when we
+  // haven't connected to the service yet.
+  const configFilename = '/home/me/.config/keybase/config.json'
+  if (fs.existsSync(configFilename)) {
+    try {
+      const configJson = JSON.parse(fs.readFileSync(configFilename, 'utf8'))
+      console.log('Loaded', configFilename, configJson)
+      if (configJson.hasOwnProperty('useNativeFrame')) {
+        config.useNativeFrame = configJson.useNativeFrame
+      }
+    } catch (e) {
+      console.warn('Invalid config file file')
     }
   }
 }
@@ -135,4 +151,5 @@ export const {
   skipSecondaryDevtools,
   userTimings,
   virtualListMarks,
+  useNativeFrame,
 } = config

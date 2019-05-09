@@ -6,6 +6,7 @@ import * as Styles from '../../styles'
 import * as Window from '../../util/window-management'
 import SyncingFolders from './syncing-folders'
 import flags from '../../util/feature-flags'
+import {useNativeFrame} from '../../local-debug.desktop'
 // A mobile-like header for desktop
 
 // Fix this as we figure out what this needs to be
@@ -114,7 +115,7 @@ class Header extends React.PureComponent<Props, State> {
             {flags.kbfsOfflineMode && <SyncingFolders />}
             {!title && rightActions}
 
-            {!Platform.isDarwin && (
+            {!Platform.isDarwin && !useNativeFrame && (
               <Kb.Box2 direction="horizontal">
                 <AppIconBox direction="vertical" onClick={Window.minimizeWindow} style={styles.appIconBox}>
                   <Kb.Icon
