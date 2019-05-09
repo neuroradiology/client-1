@@ -62,6 +62,7 @@ export const makeState: I.RecordFactory<Types._State> = I.Record({
   email: makeEmail(),
   invites: makeInvites(),
   lockdownModeEnabled: null,
+  useNativeFrameEnabled: null,
   notifications: makeNotifications(),
   password: makePassword(),
   waitingForResponse: false,

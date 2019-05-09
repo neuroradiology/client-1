@@ -22,6 +22,8 @@ type Props = {
   traceInProgress: boolean,
   processorProfileInProgress: boolean,
   hasRandomPW: boolean,
+  useNativeFrame: boolean,
+  onChangeUseNativeFrame: boolean => void,
 }
 
 const Advanced = (props: Props) => {
@@ -48,6 +50,16 @@ const Advanced = (props: Props) => {
           {props.setLockdownModeError}
         </Kb.Text>
       )}
+      <Kb.Box style={styles.checkboxContainer}>
+        <Kb.Checkbox
+          checked={props.useNativeFrame}
+          label={
+            'Use native frame'
+          }
+          onCheck={props.onChangeUseNativeFrame}
+          style={styles.checkbox}
+        />
+      </Kb.Box>
       {!Styles.isMobile && !isLinux && (
         <Kb.Box style={styles.openAtLoginCheckboxContainer}>
           <Kb.Checkbox

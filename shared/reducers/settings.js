@@ -89,6 +89,8 @@ function reducer(state: Types.State = initialState, action: SettingsGen.Actions)
       )
     case SettingsGen.loadedLockdownMode:
       return state.merge({lockdownModeEnabled: action.payload.status})
+    case SettingsGen.loadedUseNativeFrame:
+      return state.merge({useNativeFrameEnabled: action.payload.status})
     case SettingsGen.onChangeNewPasswordConfirm:
       return state.update('password', password =>
         password.merge({error: null, newPasswordConfirm: action.payload.password})
@@ -134,12 +136,14 @@ function reducer(state: Types.State = initialState, action: SettingsGen.Actions)
     case SettingsGen.loadRememberPassword:
     case SettingsGen.loadSettings:
     case SettingsGen.loadLockdownMode:
+    case SettingsGen.loadUseNativeFrame:
     case SettingsGen.notificationsRefresh:
     case SettingsGen.onChangeShowPassword:
     case SettingsGen.onSubmitNewEmail:
     case SettingsGen.onSubmitNewPassword:
     case SettingsGen.onUpdatePGPSettings:
     case SettingsGen.onChangeLockdownMode:
+    case SettingsGen.onChangeUseNativeFrame:
     case SettingsGen.stop:
     case SettingsGen.trace:
     case SettingsGen.processorProfile:

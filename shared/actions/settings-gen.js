@@ -25,11 +25,13 @@ export const loadHasRandomPw = 'settings:loadHasRandomPw'
 export const loadLockdownMode = 'settings:loadLockdownMode'
 export const loadRememberPassword = 'settings:loadRememberPassword'
 export const loadSettings = 'settings:loadSettings'
+export const loadUseNativeFrame = 'settings:loadUseNativeFrame'
 export const loadedCheckPassword = 'settings:loadedCheckPassword'
 export const loadedHasRandomPw = 'settings:loadedHasRandomPw'
 export const loadedLockdownMode = 'settings:loadedLockdownMode'
 export const loadedRememberPassword = 'settings:loadedRememberPassword'
 export const loadedSettings = 'settings:loadedSettings'
+export const loadedUseNativeFrame = 'settings:loadedUseNativeFrame'
 export const notificationsRefresh = 'settings:notificationsRefresh'
 export const notificationsRefreshed = 'settings:notificationsRefreshed'
 export const notificationsSaved = 'settings:notificationsSaved'
@@ -40,6 +42,7 @@ export const onChangeNewPassword = 'settings:onChangeNewPassword'
 export const onChangeNewPasswordConfirm = 'settings:onChangeNewPasswordConfirm'
 export const onChangeRememberPassword = 'settings:onChangeRememberPassword'
 export const onChangeShowPassword = 'settings:onChangeShowPassword'
+export const onChangeUseNativeFrame = 'settings:onChangeUseNativeFrame'
 export const onSubmitNewEmail = 'settings:onSubmitNewEmail'
 export const onSubmitNewPassword = 'settings:onSubmitNewPassword'
 export const onUpdateEmailError = 'settings:onUpdateEmailError'
@@ -73,11 +76,13 @@ type _LoadHasRandomPwPayload = void
 type _LoadLockdownModePayload = void
 type _LoadRememberPasswordPayload = void
 type _LoadSettingsPayload = void
+type _LoadUseNativeFramePayload = void
 type _LoadedCheckPasswordPayload = $ReadOnly<{|checkPasswordIsCorrect: ?boolean|}>
 type _LoadedHasRandomPwPayload = $ReadOnly<{|randomPW: boolean|}>
 type _LoadedLockdownModePayload = $ReadOnly<{|status: ?boolean|}>
 type _LoadedRememberPasswordPayload = $ReadOnly<{|remember: boolean|}>
 type _LoadedSettingsPayload = $ReadOnly<{|emails: ?I.List<Types.EmailRow>|}>
+type _LoadedUseNativeFramePayload = $ReadOnly<{|status: ?boolean|}>
 type _NotificationsRefreshPayload = void
 type _NotificationsRefreshedPayload = $ReadOnly<{|notifications: I.Map<string, Types.NotificationsGroupState>|}>
 type _NotificationsSavedPayload = void
@@ -88,6 +93,7 @@ type _OnChangeNewPasswordConfirmPayload = $ReadOnly<{|password: HiddenString|}>
 type _OnChangeNewPasswordPayload = $ReadOnly<{|password: HiddenString|}>
 type _OnChangeRememberPasswordPayload = $ReadOnly<{|remember: boolean|}>
 type _OnChangeShowPasswordPayload = void
+type _OnChangeUseNativeFramePayload = $ReadOnly<{|enabled: boolean|}>
 type _OnSubmitNewEmailPayload = void
 type _OnSubmitNewPasswordPayload = $ReadOnly<{|thenSignOut: boolean|}>
 type _OnUpdateEmailErrorPayload = $ReadOnly<{|error: Error|}>
@@ -137,11 +143,13 @@ export const createLoadHasRandomPw = (payload: _LoadHasRandomPwPayload) => ({pay
 export const createLoadLockdownMode = (payload: _LoadLockdownModePayload) => ({payload, type: loadLockdownMode})
 export const createLoadRememberPassword = (payload: _LoadRememberPasswordPayload) => ({payload, type: loadRememberPassword})
 export const createLoadSettings = (payload: _LoadSettingsPayload) => ({payload, type: loadSettings})
+export const createLoadUseNativeFrame = (payload: _LoadUseNativeFramePayload) => ({payload, type: loadUseNativeFrame})
 export const createLoadedCheckPassword = (payload: _LoadedCheckPasswordPayload) => ({payload, type: loadedCheckPassword})
 export const createLoadedHasRandomPw = (payload: _LoadedHasRandomPwPayload) => ({payload, type: loadedHasRandomPw})
 export const createLoadedLockdownMode = (payload: _LoadedLockdownModePayload) => ({payload, type: loadedLockdownMode})
 export const createLoadedRememberPassword = (payload: _LoadedRememberPasswordPayload) => ({payload, type: loadedRememberPassword})
 export const createLoadedSettings = (payload: _LoadedSettingsPayload) => ({payload, type: loadedSettings})
+export const createLoadedUseNativeFrame = (payload: _LoadedUseNativeFramePayload) => ({payload, type: loadedUseNativeFrame})
 export const createNotificationsRefresh = (payload: _NotificationsRefreshPayload) => ({payload, type: notificationsRefresh})
 export const createNotificationsRefreshed = (payload: _NotificationsRefreshedPayload) => ({payload, type: notificationsRefreshed})
 export const createNotificationsSaved = (payload: _NotificationsSavedPayload) => ({payload, type: notificationsSaved})
@@ -152,6 +160,7 @@ export const createOnChangeNewPassword = (payload: _OnChangeNewPasswordPayload) 
 export const createOnChangeNewPasswordConfirm = (payload: _OnChangeNewPasswordConfirmPayload) => ({payload, type: onChangeNewPasswordConfirm})
 export const createOnChangeRememberPassword = (payload: _OnChangeRememberPasswordPayload) => ({payload, type: onChangeRememberPassword})
 export const createOnChangeShowPassword = (payload: _OnChangeShowPasswordPayload) => ({payload, type: onChangeShowPassword})
+export const createOnChangeUseNativeFrame = (payload: _OnChangeUseNativeFramePayload) => ({payload, type: onChangeUseNativeFrame})
 export const createOnSubmitNewEmail = (payload: _OnSubmitNewEmailPayload) => ({payload, type: onSubmitNewEmail})
 export const createOnSubmitNewPassword = (payload: _OnSubmitNewPasswordPayload) => ({payload, type: onSubmitNewPassword})
 export const createOnUpdateEmailError = (payload: _OnUpdateEmailErrorPayload) => ({payload, type: onUpdateEmailError})
@@ -181,11 +190,13 @@ export type LoadHasRandomPwPayload = {|+payload: _LoadHasRandomPwPayload, +type:
 export type LoadLockdownModePayload = {|+payload: _LoadLockdownModePayload, +type: 'settings:loadLockdownMode'|}
 export type LoadRememberPasswordPayload = {|+payload: _LoadRememberPasswordPayload, +type: 'settings:loadRememberPassword'|}
 export type LoadSettingsPayload = {|+payload: _LoadSettingsPayload, +type: 'settings:loadSettings'|}
+export type LoadUseNativeFramePayload = {|+payload: _LoadUseNativeFramePayload, +type: 'settings:loadUseNativeFrame'|}
 export type LoadedCheckPasswordPayload = {|+payload: _LoadedCheckPasswordPayload, +type: 'settings:loadedCheckPassword'|}
 export type LoadedHasRandomPwPayload = {|+payload: _LoadedHasRandomPwPayload, +type: 'settings:loadedHasRandomPw'|}
 export type LoadedLockdownModePayload = {|+payload: _LoadedLockdownModePayload, +type: 'settings:loadedLockdownMode'|}
 export type LoadedRememberPasswordPayload = {|+payload: _LoadedRememberPasswordPayload, +type: 'settings:loadedRememberPassword'|}
 export type LoadedSettingsPayload = {|+payload: _LoadedSettingsPayload, +type: 'settings:loadedSettings'|}
+export type LoadedUseNativeFramePayload = {|+payload: _LoadedUseNativeFramePayload, +type: 'settings:loadedUseNativeFrame'|}
 export type NotificationsRefreshPayload = {|+payload: _NotificationsRefreshPayload, +type: 'settings:notificationsRefresh'|}
 export type NotificationsRefreshedPayload = {|+payload: _NotificationsRefreshedPayload, +type: 'settings:notificationsRefreshed'|}
 export type NotificationsSavedPayload = {|+payload: _NotificationsSavedPayload, +type: 'settings:notificationsSaved'|}
@@ -196,6 +207,7 @@ export type OnChangeNewPasswordConfirmPayload = {|+payload: _OnChangeNewPassword
 export type OnChangeNewPasswordPayload = {|+payload: _OnChangeNewPasswordPayload, +type: 'settings:onChangeNewPassword'|}
 export type OnChangeRememberPasswordPayload = {|+payload: _OnChangeRememberPasswordPayload, +type: 'settings:onChangeRememberPassword'|}
 export type OnChangeShowPasswordPayload = {|+payload: _OnChangeShowPasswordPayload, +type: 'settings:onChangeShowPassword'|}
+export type OnChangeUseNativeFramePayload = {|+payload: _OnChangeUseNativeFramePayload, +type: 'settings:onChangeUseNativeFrame'|}
 export type OnSubmitNewEmailPayload = {|+payload: _OnSubmitNewEmailPayload, +type: 'settings:onSubmitNewEmail'|}
 export type OnSubmitNewPasswordPayload = {|+payload: _OnSubmitNewPasswordPayload, +type: 'settings:onSubmitNewPassword'|}
 export type OnUpdateEmailErrorPayload = {|+payload: _OnUpdateEmailErrorPayload, +type: 'settings:onUpdateEmailError'|}
@@ -231,11 +243,13 @@ export type Actions =
   | LoadLockdownModePayload
   | LoadRememberPasswordPayload
   | LoadSettingsPayload
+  | LoadUseNativeFramePayload
   | LoadedCheckPasswordPayload
   | LoadedHasRandomPwPayload
   | LoadedLockdownModePayload
   | LoadedRememberPasswordPayload
   | LoadedSettingsPayload
+  | LoadedUseNativeFramePayload
   | NotificationsRefreshPayload
   | NotificationsRefreshedPayload
   | NotificationsSavedPayload
@@ -246,6 +260,7 @@ export type Actions =
   | OnChangeNewPasswordPayload
   | OnChangeRememberPasswordPayload
   | OnChangeShowPasswordPayload
+  | OnChangeUseNativeFramePayload
   | OnSubmitNewEmailPayload
   | OnSubmitNewPasswordPayload
   | OnUpdateEmailErrorPayload

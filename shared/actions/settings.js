@@ -442,6 +442,19 @@ const setLockdownMode = (state, action) =>
     .then(() => SettingsGen.createLoadedLockdownMode({status: action.payload.enabled}))
     .catch(() => SettingsGen.createLoadLockdownMode())
 
+const loadUseNativeFrame = state =>
+  RPCTypes.configGetValueRpcPromise({path: 'useNativeFrame'})
+    .then(result => {
+      const value = !result.isNull && !!result.b
+      return SettingsGen.createLoadedUseNativeFrame({status: value})
+    })
+    .catch(() => SettingsGen.createLoadedUseNativeFrame({status: null}))
+
+const setUseNativeFrame = (state, action) =>
+  RPCTypes.configSetValueRpcPromise({ path: 'useNativeFrame', value: { b: state.useNativeFrame, isNull: false }})
+    .then(() => SettingsGen.createLoadedUseNativeFrame({status: action.payload.enabled}))
+    .catch(() => SettingsGen.createLoadUseNativeFrame())
+
 const unfurlSettingsRefresh = (state, action) =>
   state.config.loggedIn &&
   ChatTypes.localGetUnfurlSettingsRpcPromise(undefined, Constants.chatUnfurlWaitingKey)
@@ -535,6 +548,11 @@ function* settingsSaga(): Saga.SagaGenerator<any, any> {
   yield* Saga.chainAction<SettingsGen.OnChangeLockdownModePayload>(
     SettingsGen.onChangeLockdownMode,
     setLockdownMode
+  )
+  yield* Saga.chainAction<SettingsGen.LoadUseNativeFramePayload>(SettingsGen.loadUseNativeFrame, loadLockdownMode)
+  yield* Saga.chainAction<SettingsGen.OnChangeUseNativeFramePayload>(
+    SettingsGen.onChangeUseNativeFrame,
+    setUseNativeFrame
   )
   yield* Saga.chainAction<SettingsGen.UnfurlSettingsRefreshPayload>(
     SettingsGen.unfurlSettingsRefresh,
