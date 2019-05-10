@@ -443,15 +443,20 @@ const setLockdownMode = (state, action) =>
     .catch(() => SettingsGen.createLoadLockdownMode())
 
 const loadUseNativeFrame = state =>
+  logger.info('loading use native frame')
   RPCTypes.configGetValueRpcPromise({path: 'useNativeFrame'})
     .then(result => {
+      logger.info('loading use native frame - ok')
       const value = !result.isNull && !!result.b
       return SettingsGen.createLoadedUseNativeFrame({status: value})
     })
-    .catch(() => SettingsGen.createLoadedUseNativeFrame({status: null}))
+    .catch(err => {
+      logger.error('loading use native frame - err', err.message)
+      return SettingsGen.createLoadedUseNativeFrame({status: true})
+    })
 
 const setUseNativeFrame = (state, action) =>
-  RPCTypes.configSetValueRpcPromise({ path: 'useNativeFrame', value: { b: state.useNativeFrame, isNull: false }})
+  RPCTypes.configSetValueRpcPromise({ path: 'useNativeFrame', value: { b: action.payload.enabled, isNull: false }})
     .then(() => SettingsGen.createLoadedUseNativeFrame({status: action.payload.enabled}))
     .catch(() => SettingsGen.createLoadUseNativeFrame())
 

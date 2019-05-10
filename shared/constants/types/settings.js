@@ -105,7 +105,7 @@ export type _State = {
   email: EmailState,
   password: PasswordState,
   lockdownModeEnabled: ?boolean,
-  useNativeFrameEnabled: ?boolean,
+  useNativeFrame: ?boolean,
   chat: ChatState,
   checkPasswordIsCorrect: ?boolean,
 }
