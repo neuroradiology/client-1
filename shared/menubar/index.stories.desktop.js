@@ -118,7 +118,7 @@ const load = () => {
     ))
     .add('Out of space banner', () => (
       <Kb.Box2 fullWidth={true} direction="vertical" gap="small">
-        <SpaceWarning diskSpaceStatus="warning" onRetry={Storybook.action('retry')} />
+        <SpaceWarning diskSpaceStatus="warning" onRetry={null} />
         <SpaceWarning diskSpaceStatus="error" onRetry={Storybook.action('retry')} />
       </Kb.Box2>
     ))

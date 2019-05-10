@@ -43,13 +43,16 @@ class SpaceWarning extends React.PureComponent<Props, State> {
           {...(this.props.diskSpaceStatus === 'warning' ? {onClose: this._close} : {})}
           text={
             this.props.diskSpaceStatus === 'warning'
-              ? 'You have less than 1 GB of' + ' storage space. Make some space, or unsync some folders.'
-              : 'You are' + ' out of storage space. Unsync some folders, or make some space then'
+              ? 'Your computer has less than 1 GB of storage space. Make some' +
+                ' space, or unsync some folders.'
+              : 'Your computer is out of space. Unsync some folders, or make some space and'
           }
           color={this.props.diskSpaceStatus === 'warning' ? 'blue' : 'red'}
           actions={[
             ...(this.props.onRetry ? [{onClick: this.props.onRetry, title: 'retry' + ' the sync.'}] : []),
           ]}
+          narrow={true}
+          style={{minHeight: 50}}
         />
       )
     )
