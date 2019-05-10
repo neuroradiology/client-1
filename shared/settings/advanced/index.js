@@ -57,17 +57,19 @@ const Advanced = (props: Props) => {
       <Kb.Box style={styles.progressContainer}>
         {props.settingUseNativeFrame && <Kb.ProgressIndicator />}
       </Kb.Box>
-      <Kb.Box style={styles.checkboxContainer}>
-        <Kb.Checkbox
-          checked={!props.useNativeFrame}
-          label={
-            'Hide system window frame'
-          }
-          disabled={useNativeFrameCheckboxDisabled}
-          onCheck={(x) => props.onChangeUseNativeFrame(!x)}
-          style={styles.checkbox}
-        />
-      </Kb.Box>
+      {isLinux && (
+        <Kb.Box style={styles.checkboxContainer}>
+          <Kb.Checkbox
+            checked={!props.useNativeFrame}
+            label={
+              'Hide system window frame'
+            }
+            disabled={useNativeFrameCheckboxDisabled}
+            onCheck={(x) => props.onChangeUseNativeFrame(!x)}
+            style={styles.checkbox}
+          />
+        </Kb.Box>
+      )}
       {!!props.setUseNativeFrameError && (
         <Kb.Text type="BodySmall" style={styles.error}>
           {props.setUseNativeFrameError}
