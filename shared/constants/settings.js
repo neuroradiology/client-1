@@ -4,6 +4,7 @@ import HiddenString from '../util/hidden-string'
 import type {TypedState} from './reducer'
 import * as I from 'immutable'
 import * as WaitingConstants from './waiting'
+import defaultUseNativeFrame from './platform'
 
 export const makeNotificationsGroup: I.RecordFactory<Types._NotificationsGroupState> = I.Record({
   settings: I.List(),
@@ -64,7 +65,7 @@ export const makeState: I.RecordFactory<Types._State> = I.Record({
   lockdownModeEnabled: null,
   notifications: makeNotifications(),
   password: makePassword(),
-  useNativeFrame: null,
+  useNativeFrame: defaultUseNativeFrame,
   waitingForResponse: false,
 })
 
@@ -99,3 +100,4 @@ export const setLockdownModeWaitingKey = 'settings:setLockdownMode'
 export const loadLockdownModeWaitingKey = 'settings:loadLockdownMode'
 export const checkPasswordWaitingKey = 'settings:checkPassword'
 export const dontUseWaitingKey = 'settings:settingsPage'
+export const setUseNativeFrameWaitingKey = 'settings:setUseNativeFrame'

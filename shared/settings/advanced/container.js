@@ -21,13 +21,17 @@ type OwnProps = {||}
 const mapStateToProps = state => {
   const settingLockdownMode = anyWaiting(state, Constants.setLockdownModeWaitingKey)
   const setLockdownModeError = anyErrors(state, Constants.setLockdownModeWaitingKey)
+  const settingUseNativeFrame = anyWaiting(state, Constants.setUseNativeFrameWaitingKey)
+  const setUseNativeFrameError = anyErrors(state, Constants.setUseNativeFrameWaitingKey)
   return {
     hasRandomPW: !!state.settings.password.randomPW,
     lockdownModeEnabled: state.settings.lockdownModeEnabled,
     openAtLogin: state.config.openAtLogin,
     processorProfileInProgress: Constants.processorProfileInProgress(state),
     setLockdownModeError: setLockdownModeError?.message ?? '',
+    setLockdownModeError: setUseNativeFrameError?.message ?? '',
     settingLockdownMode,
+    settingUseNativeFrame,
     traceInProgress: Constants.traceInProgress(state),
     useNativeFrame: state.settings.useNativeFrame,
   }

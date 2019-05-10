@@ -19,7 +19,9 @@ type Props = {
   onProcessorProfile: (durationSeconds: number) => void,
   onBack: () => void,
   setLockdownModeError: string,
+  setUseNativeFrameError: string,
   settingLockdownMode: boolean,
+  settingUseNativeFrame: boolean,
   traceInProgress: boolean,
   processorProfileInProgress: boolean,
   hasRandomPW: boolean,
@@ -29,6 +31,7 @@ type Props = {
 
 const Advanced = (props: Props) => {
   const disabled = props.lockdownModeEnabled == null || props.hasRandomPW || props.settingLockdownMode
+  const useNativeFrameCheckboxDisabled = props.settingUseNativeFrame
   return (
     <Kb.Box style={styles.advancedContainer}>
       <Kb.Box style={styles.progressContainer}>
@@ -51,16 +54,25 @@ const Advanced = (props: Props) => {
           {props.setLockdownModeError}
         </Kb.Text>
       )}
+      <Kb.Box style={styles.progressContainer}>
+        {props.settingUseNativeFrame && <Kb.ProgressIndicator />}
+      </Kb.Box>
       <Kb.Box style={styles.checkboxContainer}>
         <Kb.Checkbox
-          checked={props.useNativeFrame}
+          checked={!props.useNativeFrame}
           label={
-            'Use native frame'
+            'Hide system window frame'
           }
-          onCheck={props.onChangeUseNativeFrame}
+          disabled={useNativeFrameCheckboxDisabled}
+          onCheck={(x) => props.onChangeUseNativeFrame(!x)}
           style={styles.checkbox}
         />
       </Kb.Box>
+      {!!props.setUseNativeFrameError && (
+        <Kb.Text type="BodySmall" style={styles.error}>
+          {props.setUseNativeFrameError}
+        </Kb.Text>
+      )}
       {useNativeFrame !== props.useNativeFrame && (
         <Kb.Text type="BodySmall" style={styles.error}>
           Keybase needs to restart for this change to take effect.
