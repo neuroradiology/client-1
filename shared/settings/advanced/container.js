@@ -29,7 +29,7 @@ const mapStateToProps = state => {
     openAtLogin: state.config.openAtLogin,
     processorProfileInProgress: Constants.processorProfileInProgress(state),
     setLockdownModeError: setLockdownModeError?.message ?? '',
-    setLockdownModeError: setUseNativeFrameError?.message ?? '',
+    setUseNativeFrameError: setUseNativeFrameError?.message ?? '',
     settingLockdownMode,
     settingUseNativeFrame,
     traceInProgress: Constants.traceInProgress(state),

@@ -4,7 +4,7 @@ import HiddenString from '../util/hidden-string'
 import type {TypedState} from './reducer'
 import * as I from 'immutable'
 import * as WaitingConstants from './waiting'
-import defaultUseNativeFrame from './platform'
+import {defaultUseNativeFrame} from './platform'
 
 export const makeNotificationsGroup: I.RecordFactory<Types._NotificationsGroupState> = I.Record({
   settings: I.List(),
