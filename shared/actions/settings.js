@@ -554,7 +554,7 @@ function* settingsSaga(): Saga.SagaGenerator<any, any> {
     SettingsGen.onChangeLockdownMode,
     setLockdownMode
   )
-  yield* Saga.chainAction<SettingsGen.LoadUseNativeFramePayload>(SettingsGen.loadUseNativeFrame, loadLockdownMode)
+  yield* Saga.chainAction<SettingsGen.LoadUseNativeFramePayload>(SettingsGen.loadUseNativeFrame, loadUseNativeFrame)
   yield* Saga.chainAction<SettingsGen.OnChangeUseNativeFramePayload>(
     SettingsGen.onChangeUseNativeFrame,
     setUseNativeFrame
