@@ -1132,6 +1132,14 @@ export const putActionIfOnPathForNav1 = (action: TypedActions, routePath?: ?I.Li
       })
     : action
 
+// TODO(KBFS-4155): implement this
+export const getConflictState = (pathItem: Types.PathItem) => {
+  return 'none'
+}
+
+// TODO(KBFS-4155): implement this
+export const isUnmergedView = (path: Types.Path): boolean => false
+
 export const makeActionsForShowSendLinkToChat = (
   path: Types.Path,
   routePath?: ?I.List<string>
