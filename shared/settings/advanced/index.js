@@ -7,6 +7,7 @@ import flags from '../../util/feature-flags'
 // normally never do this but this call serves no purpose for users at all
 import * as RPCChatTypes from '../../constants/types/rpc-chat-gen'
 import * as RPCTypes from '../../constants/types/rpc-gen'
+import {useNativeFrame} from '../../local-debug.desktop'
 
 type Props = {
   openAtLogin: boolean,
@@ -60,6 +61,11 @@ const Advanced = (props: Props) => {
           style={styles.checkbox}
         />
       </Kb.Box>
+      {useNativeFrame !== props.useNativeFrame && (
+        <Kb.Text type="BodySmall" style={styles.error}>
+          Keybase needs to restart for this change to take effect.
+        </Kb.Text>
+      )}
       {!Styles.isMobile && !isLinux && (
         <Kb.Box style={styles.openAtLoginCheckboxContainer}>
           <Kb.Checkbox

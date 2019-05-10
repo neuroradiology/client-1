@@ -13,6 +13,7 @@ export const isWindows = platform === 'win32'
 export const isLinux = platform === 'linux'
 export const isAndroidNewerThanN = false
 export const shortcutSymbol = isDarwin ? '⌘' : 'Ctrl-'
+export const defaultUseNativeFrame = isDarwin || isLinux
 
 // For storyshots, we only want to test macOS
 export const fileUIName = isDarwin || __STORYBOOK__ ? 'Finder' : isWindows ? 'Explorer' : 'File Explorer'
@@ -25,12 +26,13 @@ if (__DEV__ && !__STORYBOOK__) {
 }
 
 const socketName = 'keybased.sock'
+const baseConfigFileName = 'config.json'
 
 const getLinuxPaths = () => {
   const useXDG = runMode !== 'devel' && !process.env['KEYBASE_XDG_OVERRIDE']
 
   // If XDG_RUNTIME_DIR is defined use that, else use $HOME/.config.
-  const homeConfigDir = path.join(homeEnv, '.config')
+  const homeConfigDir = (useXDG && process.env['XDG_CONFIG_HOME']) || path.join(homeEnv, '.config')
   const runtimeDir = (useXDG && process.env['XDG_RUNTIME_DIR']) || ''
   const socketDir = (useXDG && runtimeDir) || homeConfigDir
 
@@ -52,6 +54,7 @@ const getLinuxPaths = () => {
     logFileName: `${logDir}Keybase.app.log`,
     serverConfigFileName: `${logDir}keybase.app.serverConfig`,
     socketPath: path.join(socketDir, appName, socketName),
+    serviceConfigFileName: path.join(homeConfigDir, appName, baseConfigFileName),
   }
 }
 
@@ -72,6 +75,7 @@ const getWindowsPaths = () => {
     logFileName: `${logDir}keybase.app.log`,
     serverConfigFileName: `${logDir}keybase.app.serverConfig`,
     socketPath: path.join(dir, socketName),
+    serviceConfigFileName: `${logDir}${baseConfigFileName}`,
   }
 }
 
@@ -88,6 +92,7 @@ const getDarwinPaths = () => {
     logFileName: `${logDir}${appName}.app.log`,
     serverConfigFileName: `${logDir}${appName}.app.serverConfig`,
     socketPath: path.join(`${libraryDir}Group Containers/keybase/Library/Caches/${appName}/`, socketName),
+    serviceConfigFileName: `${libraryDir}Application Support/${appName}/${baseConfigFileName}`,
   }
 }
 
@@ -97,7 +102,7 @@ if (!paths) {
   throw new Error('Unknown OS')
 }
 
-export const {dataRoot, cacheRoot, socketPath, jsonDebugFileName, serverConfigFileName, logFileName} = paths
+export const {dataRoot, cacheRoot, socketPath, jsonDebugFileName, serverConfigFileName, logFileName, serviceConfigFileName} = paths
 
 // Empty string means let the service figure out the right directory.
 export const pprofDir = ''

@@ -14,7 +14,7 @@ import * as SettingsGen from '../actions/settings-gen'
 import * as WaitingGen from '../actions/waiting-gen'
 import {mapValues, trim} from 'lodash-es'
 import {delay} from 'redux-saga'
-import {isAndroidNewerThanN, pprofDir} from '../constants/platform'
+import {isAndroidNewerThanN, pprofDir, defaultUseNativeFrame} from '../constants/platform'
 
 const onUpdatePGPSettings = () =>
   RPCTypes.accountHasServerKeysRpcPromise()
@@ -443,17 +443,9 @@ const setLockdownMode = (state, action) =>
     .catch(() => SettingsGen.createLoadLockdownMode())
 
 const loadUseNativeFrame = state =>
-  logger.info('loading use native frame')
   RPCTypes.configGetValueRpcPromise({path: 'useNativeFrame'})
-    .then(result => {
-      logger.info('loading use native frame - ok')
-      const value = !result.isNull && !!result.b
-      return SettingsGen.createLoadedUseNativeFrame({status: value})
-    })
-    .catch(err => {
-      logger.error('loading use native frame - err', err.message)
-      return SettingsGen.createLoadedUseNativeFrame({status: true})
-    })
+    .then(result => SettingsGen.createLoadedUseNativeFrame({status: !result.isNull && !!result.b}))
+    .catch(() => SettingsGen.createLoadedUseNativeFrame({status: defaultUseNativeFrame}))
 
 const setUseNativeFrame = (state, action) =>
   RPCTypes.configSetValueRpcPromise({ path: 'useNativeFrame', value: { b: action.payload.enabled, isNull: false }})
