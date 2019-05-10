@@ -1,7 +1,7 @@
 // @flow
 import {jsonDebugFileName, serverConfigFileName} from './constants/platform.desktop'
 import {noop} from 'lodash-es'
-import {defaultUseNativeFrame,serviceConfigFileName} from './constants/platform'
+import {defaultUseNativeFrame, serviceConfigFileName} from './constants/platform'
 
 // Set this to true if you want to turn off most console logging so you can profile easier
 let PERF = false
@@ -28,9 +28,9 @@ let config = {
   showDevTools: false, // Show devtools on start
   skipAppFocusActions: false, // dont emit actions when going foreground/background, helpful while working on other actions stuff
   skipSecondaryDevtools: true, // Don't show devtools for menubar/trackers etc
+  useNativeFrame: defaultUseNativeFrame, // TODO no on windows
   userTimings: false, // Add user timings api to timeline in chrome
   virtualListMarks: false, // If true add constraints to items in virtual lists so we can tell when measuring is incorrect
-  useNativeFrame: defaultUseNativeFrame, // TODO no on windows
 }
 
 // Developer settings
@@ -85,7 +85,7 @@ if (!__STORYBOOK__) {
   // values.
   if (fs.existsSync(serviceConfigFileName)) {
     try {
-      const configJson = JSON.parse(fs.readFileSync(configFilename, 'utf8'))
+      const configJson = JSON.parse(fs.readFileSync(serviceConfigFileName, 'utf8'))
       if (configJson.hasOwnProperty('useNativeFrame')) {
         config.useNativeFrame = configJson.useNativeFrame
       }

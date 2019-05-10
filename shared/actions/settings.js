@@ -448,7 +448,7 @@ const loadUseNativeFrame = state =>
     .catch(() => SettingsGen.createLoadedUseNativeFrame({status: defaultUseNativeFrame}))
 
 const setUseNativeFrame = (state, action) =>
-  RPCTypes.configSetValueRpcPromise({ path: 'useNativeFrame', value: { b: action.payload.enabled, isNull: false }})
+  RPCTypes.configSetValueRpcPromise({path: 'useNativeFrame', value: {b: action.payload.enabled, isNull: false}})
     .then(() => SettingsGen.createLoadedUseNativeFrame({status: action.payload.enabled}))
     .catch(() => SettingsGen.createLoadUseNativeFrame())
 

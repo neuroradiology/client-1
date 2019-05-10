@@ -3,7 +3,7 @@ import URL from 'url-parse'
 import AppState from './app-state.desktop'
 import Window from './window.desktop'
 import * as SafeElectron from '../../util/safe-electron.desktop'
-import {showDevTools,useNativeFrame} from '../../local-debug.desktop'
+import {showDevTools, useNativeFrame} from '../../local-debug.desktop'
 import {hideDockIcon} from './dock-icon.desktop'
 import {isDarwin, isWindows} from '../../constants/platform'
 import logger from '../../logger'
@@ -35,9 +35,6 @@ export default function() {
 
   let appState = new AppState()
   appState.checkOpenAtLogin()
-
-  console.log("Rendering main winodw")
-  console.log("Got constant useNativeFrame", useNativeFrame)
 
   const mainWindow = new Window(htmlFile, {
     backgroundThrottling: false,

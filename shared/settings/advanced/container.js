@@ -9,7 +9,6 @@ import {
   createOnChangeLockdownMode,
   createOnChangeUseNativeFrame,
 } from '../../actions/settings-gen'
-import * as RPCTypes from '../../constants/types/rpc-gen'
 import * as RouteTreeGen from '../../actions/route-tree-gen'
 import {HeaderHoc} from '../../common-adapters'
 import * as Constants from '../../constants/settings'
@@ -55,7 +54,6 @@ export default compose(
   ),
   lifecycle({
     componentDidMount() {
-      console.log("Mounting")
       this.props._loadLockdownMode()
       this.props._loadHasRandomPW()
       this.props._loadUseNativeFrame()

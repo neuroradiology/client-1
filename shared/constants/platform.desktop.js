@@ -53,8 +53,8 @@ const getLinuxPaths = () => {
     logDir,
     logFileName: `${logDir}Keybase.app.log`,
     serverConfigFileName: `${logDir}keybase.app.serverConfig`,
-    socketPath: path.join(socketDir, appName, socketName),
     serviceConfigFileName: path.join(homeConfigDir, appName, baseConfigFileName),
+    socketPath: path.join(socketDir, appName, socketName),
   }
 }
 
@@ -74,8 +74,8 @@ const getWindowsPaths = () => {
     logDir,
     logFileName: `${logDir}keybase.app.log`,
     serverConfigFileName: `${logDir}keybase.app.serverConfig`,
-    socketPath: path.join(dir, socketName),
     serviceConfigFileName: `${logDir}${baseConfigFileName}`,
+    socketPath: path.join(dir, socketName),
   }
 }
 
@@ -91,8 +91,8 @@ const getDarwinPaths = () => {
     logDir,
     logFileName: `${logDir}${appName}.app.log`,
     serverConfigFileName: `${logDir}${appName}.app.serverConfig`,
-    socketPath: path.join(`${libraryDir}Group Containers/keybase/Library/Caches/${appName}/`, socketName),
     serviceConfigFileName: `${libraryDir}Application Support/${appName}/${baseConfigFileName}`,
+    socketPath: path.join(`${libraryDir}Group Containers/keybase/Library/Caches/${appName}/`, socketName),
   }
 }
 
